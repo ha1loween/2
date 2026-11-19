@@ -17,22 +17,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Generate Valid Manifest
+      - name: Decode Valid Manifest
         run: |
-          P="android"
           mkdir -p app/src/main
-          printf '<?xml version="1.0" encoding="utf-8"?>\n' > app/src/main/AndroidManifest.xml
-          printf '<manifest xmlns:%s="http://android.com">\n' "$P" >> app/src/main/AndroidManifest.xml
-          printf '  <uses-permission %s:name="android.permission.INTERNET" />\n' "$P" >> app/src/main/AndroidManifest.xml
-          printf '  <application %s:label="QwenPaw" %s:usesCleartextTraffic="true" %s:theme="@android:style/Theme.Material.Light.NoActionBar">\n' "$P" "$P" "$P" >> app/src/main/AndroidManifest.xml
-          printf '    <activity %s:name=".MainActivity" %s:exported="true">\n' "$P" "$P" >> app/src/main/AndroidManifest.xml
-          printf '      <intent-filter>\n' >> app/src/main/AndroidManifest.xml
-          printf '        <action %s:name="android.intent.action.MAIN" />\n' "$P" >> app/src/main/AndroidManifest.xml
-          printf '        <category %s:name="android.intent.category.LAUNCHER" />\n' "$P" >> app/src/main/AndroidManifest.xml
-          printf '      </intent-filter>\n' >> app/src/main/AndroidManifest.xml
-          printf '    </activity>\n' >> app/src/main/AndroidManifest.xml
-          printf '  </application>\n' >> app/src/main/AndroidManifest.xml
-          printf '</manifest>\n' >> app/src/main/AndroidManifest.xml
+          echo "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPG1hbmlmZXN0IHhtbG5zOmFuZHJvaWQ9Imh0dHA6Ly9zY2hlbWFzLmFuZHJvaWQuY29tL2Fway9yZXMvYW5kcm9pZCI+CiAgICA8dXNlcy1wZXJtaXNzaW9uIGFuZHJvaWQ6bmFtZT0iYW5kcm9pZC5wZXJtaXNzaW9uLklOVEVSTkVUIiAvPgogICAgPGFwcGxpY2F0aW9uCiAgICAgICAgYW5kcm9pZDpsYWJlbD0iUXdlblBhdyIKICAgICAgICBhbmRyb2lkOnVzZXNDbGVhcnRleHRUcmFmZmljPSJ0cnVlIgogICAgICAgIGFuZHJvaWQ6dGhlbWU9IkBhbmRyb2lkOnN0eWxlL1RoZW1lLk1hdGVyaWFsLkxpZ2h0Lk5vQWN0aW9uQmFyIj4KICAgICAgICA8YWN0aXZpdHkKICAgICAgICAgICAgYW5kcm9pZDpuYW1lPSIuTWFpbkFjdGl2aXR5IgogICAgICAgICAgICBhbmRyb2lkOmV4cG9ydGVkPSJ0cnVlIj4KICAgICAgICAgICAgPGludGVudC1maWx0ZXI+CiAgICAgICAgICAgICAgICA8YWN0aW9uIGFuZHJvaWQ6bmFtZT0iYW5kcm9pZC5pbnRlbnQuYWN0aW9uLk1BSU4iIC8+CiAgICAgICAgICAgICAgICA8Y2F0ZWdvcnkgYW5kcm9pZDpuYW1lPSJhbmRyb2lkLmludGVudC5jYXRlZ29yeS5MQVVOQ0hFUiIgLz4KICAgICAgICAgICAgPC9pbnRlbnQtZmlsdGVyPgogICAgICAgIDwvYWN0aXZpdHk+CiAgICA8L2FwcGxpY2F0aW9uPgo8L21hbmlmZXN0Pgo=" | base64 -d > app/src/main/AndroidManifest.xml
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
